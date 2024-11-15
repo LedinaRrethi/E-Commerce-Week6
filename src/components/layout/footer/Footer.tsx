@@ -3,7 +3,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Box, Typography, Link } from '@mui/material';
 
 const Footer: React.FC = () => {
-
   return (
     <Box
       component="footer"
@@ -11,12 +10,12 @@ const Footer: React.FC = () => {
         py: 3,
         px: 2,
         mt: 'auto',
-        backgroundColor: '#f5f5f5', 
-        color: '#000', 
+        backgroundColor: '#f5f5f5',
+        color: '#000',
         textAlign: 'center',
       }}
     >
-      <Typography variant="h6" component="p" fontWeight="bold" gutterBottom>
+      <Typography variant="h6" component="p" fontWeight="bold">
         TechStore
       </Typography>
       <Box>
