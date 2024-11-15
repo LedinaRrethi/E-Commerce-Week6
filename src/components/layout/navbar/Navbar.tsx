@@ -10,11 +10,10 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
 import { Link } from 'react-router-dom';
 import DrawerComponent from './navComp/DrawerComp';
 
-const PAGES = ['About us', 'Products', 'Contact'];
+const PAGES = ['About Us', 'Products', 'Contact'];
 
 const Navbar = () => {
   const [value, setValue] = useState<number>(0);
@@ -23,17 +22,11 @@ const Navbar = () => {
 
   return (
     <AppBar position="static" sx={{ bgcolor: 'primary.main', py: 1 }}>
-      <Toolbar>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         {isMobile ? (
           <>
             <DrawerComponent />
-            <Typography
-              variant="h4"
-              sx={{
-                flexGrow: 1,
-                textAlign: 'center',
-              }}
-            >
+            <Typography variant="h4" sx={{ textAlign: 'center', flexGrow: 1 }}>
               <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
                 TechStore
               </Link>
@@ -46,30 +39,39 @@ const Navbar = () => {
                 TechStore
               </Link>
             </Typography>
-            <Tabs
-              value={value}
-              onChange={(_, newValue) => setValue(newValue)}
-              textColor="inherit"
-              indicatorColor="secondary"
-            >
-              {PAGES.map((page, index) => (
-                <Tab
-                  key={index}
-                  label={
-                    <Link
-                      to={`/${page.toLowerCase().replace(' ', '')}`}
-                      style={{ textDecoration: 'none', color: 'inherit' }}
-                    >
-                      {page}
-                    </Link>
-                  }
-                />
-              ))}
-            </Tabs>
+
+            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+              <Tabs
+                value={value}
+                onChange={(_, newValue) => setValue(newValue)}
+                textColor="inherit"
+                indicatorColor="secondary"
+                aria-label="navigation tabs"
+                sx={{ display: 'flex', justifyContent: 'space-between' }}
+              >
+                {PAGES.map((page, index) => (
+                  <Tab
+                    key={index}
+                    label={
+                      <Link
+                        to={`/${page.toLowerCase().replace(' ', '')}`}
+                        style={{ textDecoration: 'none', color: 'inherit' }}
+                      >
+                        {page}
+                      </Link>
+                    }
+                    sx={{
+                      fontSize: '1rem',
+                      fontWeight: value === index ? 'bold' : 'normal',
+                    }}
+                  />
+                ))}
+              </Tabs>
+            </Box>
           </>
         )}
 
-        <Box sx={{ ml: 'auto', display: 'flex', gap: 2 }}>
+        <Box sx={{ display: 'flex', gap: 2 }}>
           <IconButton color="inherit" component={Link} to="/cart">
             <ShoppingCartIcon />
           </IconButton>
