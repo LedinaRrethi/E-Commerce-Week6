@@ -9,7 +9,7 @@ interface ProductCardProps {
   product: Product;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard = ({ product }: ProductCardProps) => {
   const { addProduct } = useCart();
   const [quantity, setQuantity] = useState(1);
 

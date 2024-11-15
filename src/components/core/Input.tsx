@@ -10,7 +10,7 @@ interface InputProps {
   sx?: object;
 }
 
-const Input: React.FC<InputProps> = ({ label, value, onChange, type = 'text', inputProps, sx }) => {
+const Input = ({ label, value, onChange, type = 'text', inputProps, sx }: InputProps) => {
   return (
     <TextField
       label={label}

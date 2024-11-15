@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect, useCallback, ReactNode } from 'react';
+import { createContext, useReducer, useEffect, useCallback, ReactNode } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 export interface CartItem {
@@ -26,7 +26,6 @@ const INITIAL_STATE: CartState = { cartItems: [] };
 const cartReducer = (state: CartState, action: any): CartState => {
   switch (action.type) {
     case ACTION_TYPE.ADD_PRODUCT:
-      // Add or update product in the cart
       const existingProduct = state.cartItems.find((item) => item.id === action.id);
       if (existingProduct) {
         return {
@@ -77,7 +76,7 @@ interface CartProviderProps {
   children: ReactNode;
 }
 
-export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+export const CartProvider = ({ children }: CartProviderProps) => {
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
   const [storedCart, setStoredCart] = useLocalStorage<CartState>('cart', INITIAL_STATE);
 
@@ -108,7 +107,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     dispatch({ type: ACTION_TYPE.CLEAR_CART });
   }, []);
 
-  // Sync the cart state with localStorage
   useEffect(() => {
     if (storedCart.cartItems.length > 0) {
       dispatch({
@@ -118,7 +116,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
   }, [storedCart]);
 
-  // Save the cart state to localStorage when it changes
   useEffect(() => {
     if (JSON.stringify(state) !== JSON.stringify(storedCart)) {
       setStoredCart(state);

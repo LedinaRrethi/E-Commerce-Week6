@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Container, Typography, Box, Pagination } from '@mui/material';
 import { useProduct } from '../store/productContext';
 import ProductCard from '../components/features/ProductCard';

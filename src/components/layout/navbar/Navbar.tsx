@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -17,7 +16,7 @@ import DrawerComponent from './navComp/DrawerComp';
 
 const PAGES = ['About us', 'Products', 'Contact'];
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const [value, setValue] = useState<number>(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));

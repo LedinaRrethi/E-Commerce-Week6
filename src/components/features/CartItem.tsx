@@ -10,7 +10,7 @@ interface CartItemProps {
   onQuantityChange: (id: number, quantity: number) => void;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ item, onRemove, onQuantityChange }) => {
+const CartItem = ({ item, onRemove, onQuantityChange }: CartItemProps) => {
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const quantity = Math.max(1, Number(event.target.value));
     onQuantityChange(item.id, quantity);

@@ -7,7 +7,7 @@ interface ProductFormProps {
   onClose: () => void;
 }
 
-const ProductForm: React.FC<ProductFormProps> = ({ onClose }) => {
+const ProductForm = ({ onClose }: ProductFormProps) => {
   const { addProduct } = useProduct();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -60,7 +60,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ onClose }) => {
         Upload Image
         <input type="file" hidden onChange={handleImageUpload} />
       </Button>
-      <Button variant="contained" color="primary" onClick={handleSubmit} sx={{ mt: 2 }}>
+      <Button variant="contained" color="primary" onClick={handleSubmit}>
         Add Product
       </Button>
     </Box>

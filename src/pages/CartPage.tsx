@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Container, Typography, Box, Button } from '@mui/material';
 import CartItem from '../components/features/CartItem';
 import useCart from '../hooks/useCart';
 import { CartItem as CartItemType } from '../store/cartContext';
 
-const CartPage: React.FC = () => {
+const CartPage = () => {
   const { cartItems = [], removeProduct, setProductQuantity, clearCart } = useCart();
   const [message, setMessage] = useState<string>('');
 

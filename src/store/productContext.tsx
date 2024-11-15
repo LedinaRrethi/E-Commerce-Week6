@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext, ReactNode, useEffect } from 'react';
+import { createContext, useReducer, useContext, ReactNode, useEffect } from 'react';
 import { Product } from '../types/Product';
 import useFetch from '../hooks/useFetch';
 import useLocalStorage from '../hooks/useLocalStorage';
@@ -41,14 +41,13 @@ interface ProductProviderProps {
   children: ReactNode;
 }
 
-export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
+export const ProductProvider = ({ children }: ProductProviderProps) => {
   const { data, loading, error } = useFetch<Product[]>('/data/products.json');
   const [storedProducts, setStoredProducts] = useLocalStorage<Product[]>('products', []);
   const [state, dispatch] = useReducer(productReducer, { products: storedProducts });
 
   useEffect(() => {
     if (data && !loading && !error && storedProducts.length === 0) {
-      // Set initial products from fetched data if storage is empty
       dispatch({ type: ACTION_TYPE.SET_PRODUCTS, products: data });
       setStoredProducts(data);
     }

@@ -1,8 +1,7 @@
-import React from 'react';
 import { Box, Typography, Container } from '@mui/material';
-import WelcomeImage from "../assets/welcome.jpg"
+import WelcomeImage from '../assets/welcome.jpg';
 
-const AboutUs: React.FC = () => {
+const AboutUs = () => {
   return (
     <Container maxWidth="md">
       <Box sx={{ textAlign: 'center', py: 6 }}>
@@ -10,8 +9,9 @@ const AboutUs: React.FC = () => {
           About TechStore
         </Typography>
         <Typography variant="h6" component="p" sx={{ color: 'text.secondary', mb: 4 }}>
-          Welcome to TechStore, your go-to online shop for cutting-edge electronics, home gadgets, and lifestyle accessories. 
-          We are dedicated to bringing you the best in tech with a focus on quality, innovation, and exceptional customer service.
+          Welcome to TechStore, your go-to online shop for cutting-edge electronics, home gadgets, and lifestyle
+          accessories. We are dedicated to bringing you the best in tech with a focus on quality, innovation, and
+          exceptional customer service.
         </Typography>
 
         <Box
@@ -34,10 +34,10 @@ const AboutUs: React.FC = () => {
           Our Mission
         </Typography>
         <Typography variant="body1" sx={{ color: 'text.secondary', mb: 4 }}>
-          Our mission is to empower you with the tools you need to enhance your daily life through technology. 
-          Whether you're looking for the latest gadgets, home automation solutions, or gaming gear, we have something for everyone.
+          Our mission is to empower you with the tools you need to enhance your daily life through technology. Whether
+          you're looking for the latest gadgets, home automation solutions, or gaming gear, we have something for
+          everyone.
         </Typography>
-
       </Box>
     </Container>
   );
