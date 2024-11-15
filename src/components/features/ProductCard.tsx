@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardMedia, Typography, Box, Tooltip } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import Button from '../core/Button';
 import Input from '../core/Input';
 import useCart from '../../hooks/useCart';
@@ -7,11 +8,11 @@ import { Product } from '../../types/Product';
 
 interface ProductCardProps {
   product: Product;
-  onEdit?: (id: number) => void;
 }
 
-const ProductCard = ({ product, onEdit }: ProductCardProps) => {
+const ProductCard = ({ product }: ProductCardProps) => {
   const { addProduct } = useCart();
+  const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
 
   const handleAddToCart = () => {
@@ -19,9 +20,7 @@ const ProductCard = ({ product, onEdit }: ProductCardProps) => {
   };
 
   const handleEdit = () => {
-    if (onEdit) {
-      onEdit(product.id);
-    }
+    navigate(`/edit-product/${product.id}`);
   };
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,16 +34,34 @@ const ProductCard = ({ product, onEdit }: ProductCardProps) => {
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
+        maxWidth: 300,
         border: '1px solid #ddd',
         boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
         borderRadius: '8px',
       }}
     >
-      <CardMedia component="img" height="200" image={product.imageSrc} alt={product.name} />
-      <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-        <Typography variant="h6" sx={{ textAlign: 'center' }}>
-          {product.name}
-        </Typography>
+      <CardMedia component="img" height="200" image={product.imageSrc} alt={product.name} sx={{ objectFit: 'cover' }} />
+      <CardContent
+        sx={{
+          flexGrow: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Tooltip title={product.name} placement="top" arrow>
+          <Typography
+            variant="h6"
+            sx={{
+              textAlign: 'center',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
+            {product.name}
+          </Typography>
+        </Tooltip>
 
         <Tooltip title={product.description} placement="top" arrow>
           <Typography

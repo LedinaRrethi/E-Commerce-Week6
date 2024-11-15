@@ -58,7 +58,7 @@ export const ProductProvider = ({ children }: ProductProviderProps) => {
     setStoredProducts([...state.products, product]);
   };
 
-  const updateProduct = (product: Product) => {
+  const editProduct = (product: Product) => {
     dispatch({ type: ACTION_TYPE.UPDATE_PRODUCT, product });
     setStoredProducts(state.products.map((p) => (p.id === product.id ? product : p)));
   };
@@ -69,7 +69,7 @@ export const ProductProvider = ({ children }: ProductProviderProps) => {
   };
 
   return (
-    <ProductContext.Provider value={{ products: state.products, addProduct, updateProduct, deleteProduct }}>
+    <ProductContext.Provider value={{ products: state.products, addProduct, editProduct, deleteProduct }}>
       {children}
     </ProductContext.Provider>
   );
