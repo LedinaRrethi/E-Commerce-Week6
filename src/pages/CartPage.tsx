@@ -5,7 +5,7 @@ import useCart from '../hooks/useCart';
 import { CartItem as CartItemType } from '../store/cartContext';
 
 const CartPage: React.FC = () => {
-  const { cartItems = [], removeProduct, clearCart } = useCart();
+  const { cartItems = [], removeProduct, setProductQuantity, clearCart } = useCart();
   const [message, setMessage] = useState<string>('');
 
   const handleRemove = (id: number) => {
@@ -14,22 +14,33 @@ const CartPage: React.FC = () => {
     }
   };
 
+  const handleQuantityChange = (id: number, quantity: number) => {
+    setProductQuantity(id, quantity);
+  };
+
   const handleCheckout = () => {
     setMessage('Proceeding to checkout...');
-    // TODO
+    // TODO:
   };
 
   const total = cartItems.reduce((acc: number, item: CartItemType) => acc + item.price * item.quantity, 0);
 
   return (
     <Container>
-      <Typography variant="h4">Shopping Cart</Typography>
+      <Typography variant="h4" gutterBottom>
+        Shopping Cart
+      </Typography>
       <Box mb={3}>
         {cartItems.length === 0 ? (
           <Typography>No items in cart</Typography>
         ) : (
           cartItems.map((item: CartItemType) => (
-            <CartItem key={item.id} item={item} onRemove={() => handleRemove(item.id)} />
+            <CartItem
+              key={item.id}
+              item={item}
+              onRemove={() => handleRemove(item.id)}
+              onQuantityChange={handleQuantityChange}
+            />
           ))
         )}
       </Box>

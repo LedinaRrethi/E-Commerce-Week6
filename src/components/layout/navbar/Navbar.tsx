@@ -74,7 +74,7 @@ const Navbar: React.FC = () => {
           <IconButton color="inherit" component={Link} to="/cart">
             <ShoppingCartIcon />
           </IconButton>
-          <IconButton color="inherit" component={Link} to="/account">
+          <IconButton color="inherit" component={Link} to="/admin">
             <AccountCircleIcon />
           </IconButton>
         </Box>

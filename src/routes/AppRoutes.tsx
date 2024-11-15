@@ -2,10 +2,10 @@ import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import CircularProgress from '@mui/material/CircularProgress';
+import AdminPage from '../pages/AdminPage';
 
 const AboutUs = lazy(() => import('../pages/AboutUs'));
 const ProductsPage = lazy(() => import('../pages/ProductsPage'));
-const ProductDetailsPage = lazy(() => import('../pages/ProductDetailsPage'));
 const CartPage = lazy(() => import('../pages/CartPage'));
 const Contact = lazy(() => import('../pages/Contact'));
 const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
@@ -23,7 +23,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/" element={<ProductsPage />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/products" element={<ProductsPage />} />
-        <Route path="/productDetails/:productId" element={<ProductDetailsPage />} />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="*" element={<NotFoundPage />} />

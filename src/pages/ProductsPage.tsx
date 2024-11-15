@@ -1,28 +1,17 @@
-import { useState } from 'react';
-import { Container, Typography, Box, Skeleton, Pagination } from '@mui/material';
-import useFetch from '../hooks/useFetch';
+import React, { useState } from 'react';
+import { Container, Typography, Box, Pagination } from '@mui/material';
+import { useProduct } from '../store/productContext';
 import ProductCard from '../components/features/ProductCard';
 import { Product } from '../types/Product';
 
 const ProductsPage = () => {
-  const { data: products, loading, error } = useFetch<Product[]>('/data/products.json');
+  const { products } = useProduct();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
-  if (loading)
-    return (
-      <Container maxWidth="lg" sx={{ py: 4 }}>
-        <Skeleton variant="text" width="60%" sx={{ marginBottom: 2 }} />
-        <Skeleton variant="rectangular" width="100%" height={350} sx={{ marginBottom: 2 }} />
-        <Skeleton variant="text" width="80%" />
-      </Container>
-    );
-
-  if (error) return <div>Error: {error}</div>;
-
   const indexOfLastProduct = currentPage * itemsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
-  const currentProducts = products?.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 
   const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value);
@@ -42,7 +31,7 @@ const ProductsPage = () => {
           justifyContent: 'space-between',
         }}
       >
-        {currentProducts?.map((product) => (
+        {currentProducts.map((product: Product) => (
           <Box
             key={product.id}
             sx={{
@@ -62,7 +51,7 @@ const ProductsPage = () => {
 
       <Box display="flex" justifyContent="center" mt={4}>
         <Pagination
-          count={Math.ceil((products?.length || 0) / itemsPerPage)}
+          count={Math.ceil(products.length / itemsPerPage)}
           page={currentPage}
           onChange={handlePageChange}
           color="primary"

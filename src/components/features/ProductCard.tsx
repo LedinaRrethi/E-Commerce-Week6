@@ -32,9 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, isDetailsPage = fals
     <Card sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
       <CardMedia component="img" height="200" image={product.imageSrc} alt={product.name} />
       <CardContent>
-        <Typography variant="h6" gutterBottom>
-          {product.name}
-        </Typography>
+        <Typography variant="h6">{product.name}</Typography>
         <Typography variant="body2" color="text.secondary">
           {product.description}
         </Typography>
