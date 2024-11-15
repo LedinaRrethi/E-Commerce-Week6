@@ -4,15 +4,14 @@ import { useProduct } from '../../store/productContext';
 import { Product } from '../../types/Product';
 
 interface ProductFormProps {
-  productToEdit?: Product;
   onClose: () => void;
 }
 
-const ProductForm: React.FC<ProductFormProps> = ({ productToEdit, onClose }) => {
-  const { addProduct, updateProduct } = useProduct();
-  const [name, setName] = useState(productToEdit?.name || '');
-  const [description, setDescription] = useState(productToEdit?.description || '');
-  const [price, setPrice] = useState(productToEdit?.price || '');
+const ProductForm: React.FC<ProductFormProps> = ({ onClose }) => {
+  const { addProduct } = useProduct();
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
   const [image, setImage] = useState<File | null>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,22 +19,27 @@ const ProductForm: React.FC<ProductFormProps> = ({ productToEdit, onClose }) => 
   };
 
   const handleSubmit = () => {
+    if (!name || !description || !price) {
+      alert('Please fill in all fields');
+      return;
+    }
+
     const newProduct: Product = {
-      id: productToEdit ? productToEdit.id : Date.now(),
+      id: Date.now(),
       name,
       description,
-      price: Number(price),
-      imageSrc: image ? URL.createObjectURL(image) : productToEdit?.imageSrc || '',
+      price: parseFloat(price),
+      imageSrc: image ? URL.createObjectURL(image) : '',
     };
 
-    productToEdit ? updateProduct(newProduct) : addProduct(newProduct);
-    alert(productToEdit ? 'Product updated successfully!' : 'Product added successfully!');
+    addProduct(newProduct);
+    alert('Product added successfully!');
     onClose();
   };
 
   return (
     <Box>
-      <Typography variant="h5">{productToEdit ? 'Edit Product' : 'Add New Product'}</Typography>
+      <Typography variant="h5">Add New Product</Typography>
       <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth margin="normal" />
       <TextField
         label="Description"
@@ -57,7 +61,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ productToEdit, onClose }) => 
         <input type="file" hidden onChange={handleImageUpload} />
       </Button>
       <Button variant="contained" color="primary" onClick={handleSubmit} sx={{ mt: 2 }}>
-        {productToEdit ? 'Update Product' : 'Add Product'}
+        Add Product
       </Button>
     </Box>
   );

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, Button, Typography, TextField } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import Button from '../core/Button';
+import Input from '../core/Input';
 import { CartItem as CartItemType } from '../../store/cartContext';
 
 interface CartItemProps {
@@ -27,21 +29,19 @@ const CartItem: React.FC<CartItemProps> = ({ item, onRemove, onQuantityChange })
             <Typography variant="body2" color="text.secondary" mr={2}>
               Qty:
             </Typography>
-            <TextField
-              type="number"
+            <Input
               value={item.quantity}
               onChange={handleQuantityChange}
+              type="number"
               inputProps={{ min: 1 }}
-              size="small"
               sx={{ width: 60 }}
+              label={''}
             />
           </Box>
         </Box>
       </Box>
       <Box>
-        <Button variant="outlined" color="error" onClick={onRemove}>
-          Remove
-        </Button>
+        <Button label="Remove" color="error" onClick={onRemove} />
       </Box>
     </Box>
   );
